@@ -8,6 +8,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [cart, setCart] = useState([]);
+  const [role, setRole] = useState('');
+
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState("");
 
