@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const [role, setRole] = useState(null);
   const [username, setUsername] = useState("");
   const [cart, setCart] = useState([]);
   const [productos, setProductos] = useState([]);
@@ -28,7 +27,7 @@ export default function Home() {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/products");
+        const res = await fetch("https://examenomar.onrender.com/api/products");
         if (!res.ok) throw new Error("Error al obtener productos");
 
         const data = await res.json();

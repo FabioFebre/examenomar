@@ -14,7 +14,7 @@ export default function Login() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", { // <-- confirma esta URL
+      const res = await fetch("https://examenomar.onrender.com/api/auth/login", { // <-- confirma esta URL
         method: "POST",
         headers: {
           "Content-Type": "application/json",
