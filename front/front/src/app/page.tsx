@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [cart, setCart] = useState([]);
+  const [role, setRole] = useState('');
+
   const [productos, setProductos] = useState([]);
   const [error, setError] = useState("");
 
@@ -19,6 +20,7 @@ export default function Home() {
     if (!storedRole || storedRole !== "user") {
       router.replace("/login");
     } else {
+      setRole(storedRole);
       setUsername(storedUsername || "Usuario");
       setLoading(false);
     }
@@ -53,7 +55,6 @@ export default function Home() {
       <section className="flex-1">
         <header className="mb-6 flex justify-between items-center">
           <h1 className="text-3xl font-bold text-[#375497]">Bienvenido, {username}</h1>
-
           {/* Icono carrito solo en mobile */}
           <div className="lg:hidden relative">
             🛒
@@ -75,16 +76,11 @@ export default function Home() {
             >
               <div>
                 {prod.image_url && (
-                  <div className="w-full h-40 relative mb-2">
-                    <Image
-                      src={prod.image_url}
-                      alt={prod.name}
-                      fill
-                      className="object-cover rounded"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      priority
-                    />
-                  </div>
+                  <img
+                    src={prod.image_url}
+                    alt={prod.name}
+                    className="w-full h-40 object-cover rounded mb-2"
+                  />
                 )}
                 <h2 className="text-lg font-semibold text-[#375497]">{prod.name}</h2>
                 <p className="text-gray-600 mt-1">${prod.price}</p>
@@ -107,9 +103,7 @@ export default function Home() {
         <header className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">🛒 Carrito</h2>
           {cart.length > 0 && (
-            <span className="bg-red-600 text-black text-xs rounded-full px-2">
-              {cart.length}
-            </span>
+            <span className="bg-red-600 text-black text-xs rounded-full px-2">{cart.length}</span>
           )}
         </header>
 
